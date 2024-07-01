@@ -16,7 +16,32 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: lucasorramon/hello-go-2:v6
+          image: lucasorramon/hello-go-2:v7.3
+          startupProbe: # Inicializou?
+            httpGet:
+              path: /healthz
+              port: 9090
+            periodSeconds: 3
+            failureThreshold: 30
+
+          readinessProbe: # Pronto para receber tráfego?
+            httpGet:
+              path: /healthz
+              port: 9090
+            periodSeconds: 3
+            failureThreshold: 1
+#            initialDelaySeconds: 10
+
+          livenessProbe: # Vivo?
+            httpGet:
+              path: /healthz
+              port: 9090
+            periodSeconds: 5
+            failureThreshold: 1
+            timeoutSeconds: 1
+            successThreshold: 1
+#            initialDelaySeconds: 15
+          
           envFrom:
             - configMapRef:
                 name: goserver-env
