@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: lucasorramon/hello-go-2:v7.3
+          image: lucasorramon/hello-go-2:v7.4
 
           resources:
             requests:
