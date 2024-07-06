@@ -17,6 +17,15 @@ spec:
       containers:
         - name: goserver
           image: lucasorramon/hello-go-2:v7.3
+
+          resources:
+            requests:
+              cpu: "0.3"
+              memory: 20Mi
+            limits:
+              cpu: "0.3"
+              memory: 25Mi
+
           startupProbe: # Inicializou?
             httpGet:
               path: /healthz
@@ -41,7 +50,7 @@ spec:
             timeoutSeconds: 1
             successThreshold: 1
 #            initialDelaySeconds: 15
-          
+
           envFrom:
             - configMapRef:
                 name: goserver-env
